@@ -18,4 +18,4 @@ Usage
 3. Add your theme/template inside the `views` folder.
 4. From your controller load the view using `$this->template->view('view_name')`.
  
-For more details visit http://wp.me/p59VpT-8c 
+For more details visit http://ghumkumar.com/codeigniter-template-library/
