@@ -4,6 +4,10 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+        $this->template->alert(
+                'An alert set via template library.',
+                'info'
+            );
 		$this->template->view('home/index');
 	}
 }

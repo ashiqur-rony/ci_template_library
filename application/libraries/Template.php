@@ -1,5 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * Library to handle CodeIgniter views via templating. Features include handling multiple templates, set and show message/alert etc.
+ * @author: Ashiqur Rahman
+ **/
+ 
 /**
  * Define the default template
  **/
@@ -51,7 +55,7 @@ class Template {
         $this->ci->session->set_userdata('active_template', $default);
 		return $default;
 	}
-    
+
     /**
      * This function generates the output based on active template.
      *
@@ -59,24 +63,41 @@ class Template {
      * @param array $data The data to be displayed in the view
      * @param bool $alternate_template Whether an alternative template to be used for this view
      * @param string $template Name of the alternative template to be used
-     * @param bool $print Whether this is a print view
+     * @param bool $no_skeleton set whether to load the skeleton layout
+     *
+     * @internal param bool $print Whether this is a print view
      * @access public
-     **/
-	public function view($view = '', $data = NULL, $alternate_template = FALSE, $template = DEFAULT_TEMPLATE, $print = FALSE)
+     */
+	public function view($view = '', $data = NULL, $alternate_template = FALSE, $template = DEFAULT_TEMPLATE, $no_skeleton = FALSE)
 	{
         $template_name = $template;
         if(!$alternate_template) {
             $template_name = $this->get();
+        }
+
+        $data['template_name'] = $template_name;
+        $alerts = $this->ci->session->userdata('alert');
+        if(!empty($alerts)) {
+            $data['alerts'] = $this->ci->session->userdata('alert');
+            $this->ci->session->set_userdata('alert', array());
         }
         
         if(strlen($view) == 0 || !file_exists( APPPATH . 'views/' . $template_name . '/' . $view . '.php')) {
             show_error('Unable to load the template: ' . $template_name . '/' . $view . '.php');
         }
 
-        if(!$print) {
+        if(!$no_skeleton) {
             $this->ci->load->view($template_name . '/' . 'layout', array('data' => $data, 'view' => $template_name . '/' . $view));
+            return;
         }
+        $this->ci->load->view($template_name . '/' . $view, array('data' => $data));
 	}
+
+    public function alert($message, $type = 'info') {
+        $alerts = $this->ci->session->userdata('alert');
+        $alerts[$type][] = $message;
+        $this->ci->session->set_userdata('alert', $alerts);
+    }
     
 }
 
