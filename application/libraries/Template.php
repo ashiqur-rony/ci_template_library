@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * Library to handle CodeIgniter views via templating. Features include handling multiple templates, set and show message/alert etc.
+ * Library to handle CodeIgniter views via template. Features include handling multiple templates, set and show message/alert etc.
  * @author: Ashiqur Rahman
+ * @url: https://github.com/ghumkumar/ci_template_library
  **/
  
 /**

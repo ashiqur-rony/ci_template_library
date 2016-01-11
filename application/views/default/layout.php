@@ -6,6 +6,7 @@
 <body>
     <div class="wrapper">
         <?php
+            /* Lets show the alerts first */
             if(isset($data['alerts']) && is_array($data['alerts'])) {
                 foreach($data['alerts'] as $type => $alerts) {
             ?>

@@ -1,2 +1,2 @@
 <h1>Welcome</h1>
-<p>This is the home view!</p>
+<p>This is a basic view of the template!</p>
